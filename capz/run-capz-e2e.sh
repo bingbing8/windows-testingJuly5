@@ -144,7 +144,8 @@ create_cluster(){
     fi
 
     # set the kube config to the workload cluster
-    export KUBECONFIG="$PWD"/"${CLUSTER_NAME}".kubeconfig
+    if [[ ! "${RUN_TEST_FROM_MANAGEMENT_CLUSTER}" == "true" ]]; then
+        export KUBECONFIG="$PWD"/"${CLUSTER_NAME}".kubeconfig
 }
 
 set_azure_envs() {

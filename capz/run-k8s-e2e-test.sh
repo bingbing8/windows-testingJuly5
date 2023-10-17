@@ -106,6 +106,7 @@ apply_hyperv_configuration(){
 
 run_e2e_test() {
     export SKIP_TEST="${SKIP_TEST:-"false"}"
+    ret=0
     if [[ ! "$SKIP_TEST" == "true" ]]; then
         ## get and run e2e test 
         ## https://github.com/kubernetes/sig-release/blob/master/release-engineering/artifacts.md#content-of-kubernetes-test-system-archtargz-on-example-of-kubernetes-test-linux-amd64targz-directories-removed-from-list
@@ -133,6 +134,7 @@ run_e2e_test() {
 
         log "starting to run e2e tests"
         set -x
+        set +e
         "$PWD"/kubernetes/test/bin/ginkgo --nodes="${GINKGO_NODES}" "$PWD"/kubernetes/test/bin/e2e.test -- \
             --provider=skeleton \
             --ginkgo.noColor \
@@ -151,7 +153,9 @@ run_e2e_test() {
             --report-dir="${ARTIFACTS}" \
             --prepull-images=true \
             --v=5 "${ADDITIONAL_E2E_ARGS[@]}"
+        ret=$?
         set +x
+        set -e
         log "e2e tests complete"
     fi
 }
