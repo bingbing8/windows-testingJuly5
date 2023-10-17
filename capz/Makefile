@@ -9,4 +9,4 @@ generate-templates: install-kustomize
 	./kustomize build --load-restrictor LoadRestrictionsNone templates/pr/ > templates/windows-pr.yaml
 	./kustomize build --load-restrictor LoadRestrictionsNone templates/gmsa/ci/ > templates/gmsa-ci.yaml
 	./kustomize build --load-restrictor LoadRestrictionsNone templates/gmsa/pr/ > templates/gmsa-pr.yaml
-	./kustomize build --load-restrictor LoadRestrictionsNone templates/runtestfrommgmtcluster/ > templates/run-test-fromm-gmt-cluster.yaml
+	./kustomize build --load-restrictor LoadRestrictionsNone templates/runtestfrommgmtcluster/ > templates/run-test-from-mgmt-cluster.yaml

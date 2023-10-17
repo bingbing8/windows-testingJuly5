@@ -131,7 +131,7 @@ create_cluster(){
                 template="$SCRIPT_ROOT"/templates/gmsa-ci.yaml
             fi
         elif [[ "${RUN_TEST_FROM_MANAGEMENT_CLUSTER}" == "true" ]]; then
-            template="$SCRIPT_ROOT"/templates/run-test-fromm-gmt-cluster.yaml
+            template="$SCRIPT_ROOT"/templates/run-test-from-mgmt-cluster.yaml
         fi
         echo "Using $template"
         
