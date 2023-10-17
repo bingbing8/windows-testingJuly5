@@ -1,3 +1,9 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
 export SKIP_TEST="${SKIP_TEST:-"false"}"
 if [[ ! "$SKIP_TEST" == "true" ]]; then
     log "delete test-pod if exist"
