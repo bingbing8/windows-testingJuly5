@@ -4,6 +4,11 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+log() {
+	local msg=$1
+	echo "$(date -R): $msg"
+}
+
 export SKIP_TEST="${SKIP_TEST:-"false"}"
 if [[ ! "$SKIP_TEST" == "true" ]]; then
     log "delete test-pod if exist"
