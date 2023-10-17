@@ -35,7 +35,8 @@ main() {
     export CI="${CI:-""}"
 
     set_azure_envs
-    set_ci_versionIS_PRESUBMIT="$(capz::util::should_build_kubernetes)"
+    set_ci_version
+    IS_PRESUBMIT="$(capz::util::should_build_kubernetes)"
     if [[ "${IS_PRESUBMIT}" == "true" ]]; then
         "${CAPZ_DIR}/scripts/ci-build-kubernetes.sh";
         trap run_capz_e2e_cleanup EXIT # reset the EXIT trap since ci-build-kubernetes.sh also sets it.
