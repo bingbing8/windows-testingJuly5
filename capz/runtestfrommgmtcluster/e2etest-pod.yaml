@@ -62,6 +62,8 @@ spec:
       value: "${HYPERV}"
     - name: GMSA
       value: "${GMSA}"
+    - name: SKIP_TEST
+      value: "${SKIP_TEST}"
     volumeMounts:
     - name: results
       mountPath: /_artifacts
