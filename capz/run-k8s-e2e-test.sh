@@ -158,6 +158,7 @@ run_e2e_test() {
         set -e
         log "e2e tests complete"
     fi
+    return $ret
 }
 
 log() {

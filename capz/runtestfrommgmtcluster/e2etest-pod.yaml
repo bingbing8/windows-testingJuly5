@@ -40,6 +40,8 @@ spec:
     env:
     - name: CI_VERSION
       value: "${CI_VERSION}"
+    - name: CI
+      value: "${CI}"
     - name: CLUSTER_NAME
       value: "${CLUSTER_NAME}"
     - name: GINKGO_NODES
