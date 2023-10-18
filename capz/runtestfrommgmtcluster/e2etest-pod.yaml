@@ -32,6 +32,7 @@ spec:
         cd $(pwd)windows-testing;
         kubectl get secret "${CLUSTER_NAME}-kubeconfig" -o jsonpath='{.data.*}' | base64 -d > kube-config;        
         export KUBECONFIG="$(pwd)/kube-config";
+        cat "$(pwd)/kube-config";
         export ARTIFACTS="/_artifacts";
         chmod +x ./capz/run-k8s-e2e-test.sh;
         set +e;
