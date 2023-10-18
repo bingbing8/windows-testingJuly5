@@ -4,6 +4,8 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+SCRIPT_PATH=$(realpath "${BASH_SOURCE[0]}")
+SCRIPT_ROOT=$(dirname "${SCRIPT_PATH}")
 log() {
 	local msg=$1
 	echo "$(date -R): $msg"
@@ -12,9 +14,9 @@ log() {
 export SKIP_TEST="${SKIP_TEST:-"false"}"
 if [[ ! "$SKIP_TEST" == "true" ]]; then
     log "delete test-pod if exist"
-    kubectl delete pod test-pod --ignore-not-found=true
-    kubectl apply -f "$SCRIPT_ROOT"/runtestfrommgmtcluster/run-e2e-test-sa.yaml
-    < "$SCRIPT_ROOT"/runtestfrommgmtcluster/e2etest-pod.yaml envsubst | kubectl apply -f -
+    #kubectl delete pod test-pod --ignore-not-found=true
+    #kubectl apply -f "$SCRIPT_ROOT"/runtestfrommgmtcluster/run-e2e-test-sa.yaml
+    #< "$SCRIPT_ROOT"/runtestfrommgmtcluster/e2etest-pod.yaml envsubst | kubectl apply -f -
     max_item=50
     counter=0
     log "wait test to completed or error ..."
