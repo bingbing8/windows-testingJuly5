@@ -57,7 +57,9 @@ spec:
     - name: KPNG
       value: "${KPNG}"
     - name: HYPERV
-      value: "${KPNG}"
+      value: "${HYPERV}"
+    - name: GMSA
+      value: "${GMSA}"
     volumeMounts:
     - name: results
       mountPath: /_artifacts
