@@ -36,7 +36,7 @@ spec:
         cp "$(pwd)/kube-config" "/_artifacts/";
         export ARTIFACTS="/_artifacts";
         chmod +x ./capz/run-k8s-e2e-test.sh;
-        kubectl get nodes -wide;
+        kubectl get nodes;
         kubectl get pods --all-namespaces;
         set +e;
         ./capz/run-k8s-e2e-test.sh;
