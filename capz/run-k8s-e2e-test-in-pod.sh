@@ -22,7 +22,7 @@ log "delete test-pod if exist"
 kubectl delete pod test-pod --ignore-not-found=true
 kubectl apply -f "${SCRIPT_ROOT}"/runtestfrommgmtcluster/run-e2e-test-sa.yaml
 < "${SCRIPT_ROOT}"/runtestfrommgmtcluster/e2etest-pod.yaml envsubst | kubectl apply -f -
-max_item=80
+max_item=90
 counter=0
 log "wait tasks on pod to completed or error ..."
 ret=1
