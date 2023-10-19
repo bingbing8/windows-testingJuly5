@@ -19,22 +19,25 @@ spec:
         apt-get install rsync -y;
         apt-get install ca-certificates curl git -y;
         apt-get install jq -y;
-        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl";
-        curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256";
+        curl -LO "https://dl.k8s.io/release/v1.27.7/bin/linux/amd64/kubectl";
+        curl -LO "https://dl.k8s.io/v1.27.7/bin/linux/amd64/kubectl.sha256";
         echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check;
         chmod +x kubectl;
         mkdir -p ~/.local/bin;
         cp ./kubectl ~/.local/bin/kubectl;
         export PATH=~/.local/bin:$PATH;
+        kubectl version --output=yaml;
         git clone https://github.com/bingbing8/windows-testingJuly5 windows-testing;
         git clone https://github.com/kubernetes-sigs/cluster-api-provider-azure cluster-api-provider-azure;
         export CAPZ_DIR="$(pwd)/cluster-api-provider-azure";
         cd $(pwd)windows-testing;
         kubectl get secret "${CLUSTER_NAME}-kubeconfig" -o jsonpath='{.data.*}' | base64 -d > kube-config;        
         export KUBECONFIG="$(pwd)/kube-config";
-        cat "$(pwd)/kube-config";
+        cp "$(pwd)/kube-config" "/_artifacts/";
         export ARTIFACTS="/_artifacts";
         chmod +x ./capz/run-k8s-e2e-test.sh;
+        kubectl get nodes -wide;
+        kubectl get pods --all-namespaces;
         set +e;
         ./capz/run-k8s-e2e-test.sh;
         echo $? > "/_artifacts/exit-code.txt"
@@ -75,7 +78,7 @@ spec:
     args:
       - echo "started in keep live container";
         ls /results/;
-        echo "wait 10 mins";
+        echo "wait 10 mins to copy logs";
         sleep 600;
     volumeMounts:
     - name: results
