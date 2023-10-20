@@ -5,7 +5,6 @@ set -o nounset
 set -o pipefail
 
 main() {
-    log "in run0k8s-e2e-test.sh..."
     ensure_envs
     apply_workload_configuraiton
     wait_for_nodes
@@ -27,12 +26,15 @@ wait_for_nodes() {
     kubectl get nodes -o wide
     kubectl get pods -A -o wide
     
+    log "before loop"
     # Ensure that all nodes are registered with the API server before checking for readiness
     local total_nodes="$((CONTROL_PLANE_MACHINE_COUNT + WINDOWS_WORKER_MACHINE_COUNT))"
     while [[ $(kubectl get nodes -ojson | jq '.items | length') -ne "${total_nodes}" ]]; do
+        log "in loop sleep 10"
         sleep 10
     done
 
+    log "after loop sleep 10"
     kubectl get nodes -o wide
     kubectl get pods -A -o wide
 
