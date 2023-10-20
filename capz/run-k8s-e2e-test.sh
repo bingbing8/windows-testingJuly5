@@ -5,6 +5,7 @@ set -o nounset
 set -o pipefail
 
 main() {
+    log "in run0k8s-e2e-test.sh..."
     ensure_envs
     apply_workload_configuraiton
     wait_for_nodes
